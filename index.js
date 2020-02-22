@@ -74,13 +74,11 @@ var ws_log = function(msg) {
 }
 
 async function init() {
-    let online = true;
     if (window.location.host !== "grafeia.github.io") {
         try {
             ws = await connect();
         } catch {
             log_err("can't connect logger");
-            online = false;
         }
     }
     log_err("ready for wasm");
@@ -89,7 +87,7 @@ async function init() {
     });
     log_err("wasm loaded");
     try {
-        if (online) {
+        if (ws) {
             wasm_bindgen.online();
         } else {
             wasm_bindgen.offline();
