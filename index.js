@@ -7,7 +7,9 @@ function ws_log(msg) {
     }
 };
 function ws_send(data) {
-    ws.send(data);
+    if (ws) {
+        ws.send(data);
+    }
 }
 function set_scroll_factors(factors) {
     // pixel delta factor x and y
