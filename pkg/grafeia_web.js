@@ -195,8 +195,8 @@ __exports.online = function(canvas) {
 * @param {any} canvas
 * @returns {WasmView}
 */
-__exports.offlin = function(canvas) {
-    var ret = wasm.offlin(addHeapObject(canvas));
+__exports.offline = function(canvas) {
+    var ret = wasm.offline(addHeapObject(canvas));
     return WasmView.__wrap(ret);
 };
 
