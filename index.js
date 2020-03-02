@@ -1,6 +1,11 @@
 let ws_callback = null;
 let ws = null;
 let log_div = document.getElementById("log");
+const ERROR = 1;
+const WARN = 2;
+const INFO = 3;
+const DEBUG = 4;
+const TRACE = 5;
 const log_fns = {
     1: s => console.error(s),
     2: s => console.warn(s),
@@ -13,7 +18,7 @@ function log(level, msg) {
     if (ws) {
         ws.send(msg);
     }
-    if (level <= 3) {
+    if (level <= INFO) {
         let p = document.createElement("p");
         p.appendChild(document.createTextNode(msg));
         log_div.appendChild(p);
@@ -73,13 +78,19 @@ function connect() {
     });
 }
 let view;
-function init_view(socket) {
+async function init_view(socket) {
     let canvas = document.getElementById("canvas");
     let capture = document.getElementById("capture");
     if (socket) {
         view = wasm_bindgen.online(canvas);
     } else {
-        view = wasm_bindgen.offline(canvas);
+        log(INFO, "fetching document");
+        let data = await fetch("book.graf")
+        .then(r => r.arrayBuffer())
+        .then(buf => new Uint8Array(buf));
+
+        log(INFO, "initializing");
+        view = wasm_bindgen.offline(canvas, data);
     }
 
     let requested = false;
@@ -122,8 +133,9 @@ async function init() {
     }
 
     try {
-        init_view(ws);
+        await init_view(ws);
         view.idle();
+        view.render();
     } catch (e) {
         log(1, e);
     }
