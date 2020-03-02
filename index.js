@@ -61,7 +61,7 @@ function data_url() {
     if (location.hash) {
         name = location.hash.substr(1);
     }
-    return `${location.protocol}//${window.location.host}/${name}.graf`;
+    return `${location.protocol}//${location.host}${location.pathname}${name}.graf`;
 }
 function connect() {
     return new Promise(function(resolve, reject) {
@@ -93,10 +93,14 @@ async function init_view(socket) {
     if (socket) {
         view = wasm_bindgen.online(canvas);
     } else {
-        log(INFO, "fetching document");
-        let data = await fetch(data_url())
-        .then(r => r.arrayBuffer())
-        .then(buf => new Uint8Array(buf));
+        let url = data_url();
+        log(INFO, `fetching document from ${url}`);
+        let response = await fetch(url);
+        if (response.status != 200) {
+            log(ERROR, `${url} not found`);
+            return;
+        }
+        let data = new Uint8Array(await response.arrayBuffer());
 
         log(INFO, "initializing");
         view = wasm_bindgen.offline(canvas, data);
