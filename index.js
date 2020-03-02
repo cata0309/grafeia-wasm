@@ -55,6 +55,14 @@ function ws_url() {
     let protocol = { "http:": "ws:", "https:": "wss:" }[location.protocol];
     return `${protocol}//${window.location.host}/log`;
 }
+function data_url() {
+    let location = window.location;
+    let name = "demo";
+    if (location.hash) {
+        name = location.hash.substr(1);
+    }
+    return `${location.protocol}//${window.location.host}/${name}.graf`;
+}
 function connect() {
     return new Promise(function(resolve, reject) {
         // Create WebSocket connection.
@@ -85,7 +93,7 @@ async function init_view(socket) {
         view = wasm_bindgen.online(canvas);
     } else {
         log(INFO, "fetching document");
-        let data = await fetch("book.graf")
+        let data = await fetch(data_url())
         .then(r => r.arrayBuffer())
         .then(buf => new Uint8Array(buf));
 
