@@ -85,6 +85,7 @@ function connect() {
         });
     });
 }
+let spin_fan = false;
 let view;
 async function init_view(socket) {
     let canvas = document.getElementById("canvas");
@@ -104,13 +105,26 @@ async function init_view(socket) {
     let requested = false;
     function animation_frame(time) {
         requested = false;
+        let t0 = performance.now();
         view.animation_frame(time);
+        let t1 = performance.now();
+        let dt = t1 - t0;
+        console.log(`${dt}ms (${1000 / dt}fps)`);
+
+        request_animation_frame();
     }
-    function check(_request_redraw) {
-        let request_redraw = view.idle();
-        if (request_redraw && !requested) {
+
+    function request_animation_frame() {
+        if (!requested) {
             window.requestAnimationFrame(animation_frame);
             requested = true;
+        }
+    }
+
+    function check(_request_redraw) {
+        let request_redraw = view.idle();
+        if (request_redraw) {
+            request_animation_frame();
         }
     }
 
