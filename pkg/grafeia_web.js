@@ -521,10 +521,6 @@ function init(module) {
         var ret = getObject(arg0).offsetY;
         return ret;
     };
-    imports.wbg.__widl_f_now_Performance = function(arg0) {
-        var ret = getObject(arg0).now();
-        return ret;
-    };
     imports.wbg.__widl_instanceof_WebGL2RenderingContext = function(arg0) {
         var ret = getObject(arg0) instanceof WebGL2RenderingContext;
         return ret;
@@ -759,10 +755,6 @@ function init(module) {
     imports.wbg.__widl_f_device_pixel_ratio_Window = function(arg0) {
         var ret = getObject(arg0).devicePixelRatio;
         return ret;
-    };
-    imports.wbg.__widl_f_performance_Window = function(arg0) {
-        var ret = getObject(arg0).performance;
-        return isLikeNone(ret) ? 0 : addHeapObject(ret);
     };
     imports.wbg.__wbg_call_12b949cfc461d154 = function(arg0, arg1) {
         try {
