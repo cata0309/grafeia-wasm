@@ -436,6 +436,36 @@ function init(module) {
         var ret = getObject(arg0);
         return addHeapObject(ret);
     };
+    imports.wbg.__wbg_self_1b7a39e3a92c949c = function() {
+        try {
+            var ret = self.self;
+            return addHeapObject(ret);
+        } catch (e) {
+            handleError(e)
+        }
+    };
+    imports.wbg.__wbg_require_604837428532a733 = function(arg0, arg1) {
+        var ret = require(getStringFromWasm0(arg0, arg1));
+        return addHeapObject(ret);
+    };
+    imports.wbg.__wbg_crypto_968f1772287e2df0 = function(arg0) {
+        var ret = getObject(arg0).crypto;
+        return addHeapObject(ret);
+    };
+    imports.wbg.__wbindgen_is_undefined = function(arg0) {
+        var ret = getObject(arg0) === undefined;
+        return ret;
+    };
+    imports.wbg.__wbg_getRandomValues_a3d34b4fee3c2869 = function(arg0) {
+        var ret = getObject(arg0).getRandomValues;
+        return addHeapObject(ret);
+    };
+    imports.wbg.__wbg_getRandomValues_f5e14ab7ac8e995d = function(arg0, arg1, arg2) {
+        getObject(arg0).getRandomValues(getArrayU8FromWasm0(arg1, arg2));
+    };
+    imports.wbg.__wbg_randomFillSync_d5bd2d655fdf256a = function(arg0, arg1, arg2) {
+        getObject(arg0).randomFillSync(getArrayU8FromWasm0(arg1, arg2));
+    };
     imports.wbg.__widl_instanceof_Window = function(arg0) {
         var ret = getObject(arg0) instanceof Window;
         return ret;
@@ -519,6 +549,10 @@ function init(module) {
     };
     imports.wbg.__widl_f_offset_y_MouseEvent = function(arg0) {
         var ret = getObject(arg0).offsetY;
+        return ret;
+    };
+    imports.wbg.__widl_f_now_Performance = function(arg0) {
+        var ret = getObject(arg0).now();
         return ret;
     };
     imports.wbg.__widl_instanceof_WebGL2RenderingContext = function(arg0) {
@@ -756,6 +790,10 @@ function init(module) {
         var ret = getObject(arg0).devicePixelRatio;
         return ret;
     };
+    imports.wbg.__widl_f_performance_Window = function(arg0) {
+        var ret = getObject(arg0).performance;
+        return isLikeNone(ret) ? 0 : addHeapObject(ret);
+    };
     imports.wbg.__wbg_call_12b949cfc461d154 = function(arg0, arg1) {
         try {
             var ret = getObject(arg0).call(getObject(arg1));
@@ -800,10 +838,6 @@ function init(module) {
             handleError(e)
         }
     };
-    imports.wbg.__wbindgen_is_undefined = function(arg0) {
-        var ret = getObject(arg0) === undefined;
-        return ret;
-    };
     imports.wbg.__wbg_buffer_1bb127df6348017b = function(arg0) {
         var ret = getObject(arg0).buffer;
         return addHeapObject(ret);
@@ -818,32 +852,6 @@ function init(module) {
     };
     imports.wbg.__wbg_set_73d74d5ab6493dfb = function(arg0, arg1, arg2) {
         getObject(arg0).set(getObject(arg1), arg2 >>> 0);
-    };
-    imports.wbg.__wbg_getRandomValues_f5e14ab7ac8e995d = function(arg0, arg1, arg2) {
-        getObject(arg0).getRandomValues(getArrayU8FromWasm0(arg1, arg2));
-    };
-    imports.wbg.__wbg_randomFillSync_d5bd2d655fdf256a = function(arg0, arg1, arg2) {
-        getObject(arg0).randomFillSync(getArrayU8FromWasm0(arg1, arg2));
-    };
-    imports.wbg.__wbg_self_1b7a39e3a92c949c = function() {
-        try {
-            var ret = self.self;
-            return addHeapObject(ret);
-        } catch (e) {
-            handleError(e)
-        }
-    };
-    imports.wbg.__wbg_require_604837428532a733 = function(arg0, arg1) {
-        var ret = require(getStringFromWasm0(arg0, arg1));
-        return addHeapObject(ret);
-    };
-    imports.wbg.__wbg_crypto_968f1772287e2df0 = function(arg0) {
-        var ret = getObject(arg0).crypto;
-        return addHeapObject(ret);
-    };
-    imports.wbg.__wbg_getRandomValues_a3d34b4fee3c2869 = function(arg0) {
-        var ret = getObject(arg0).getRandomValues;
-        return addHeapObject(ret);
     };
     imports.wbg.__wbindgen_boolean_get = function(arg0) {
         const v = getObject(arg0);
